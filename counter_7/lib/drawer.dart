@@ -1,65 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:counter_7/main.dart';
-import 'package:counter_7/form.dart';
-import 'package:counter_7/budget.dart';
+import 'package:counter_7/page/budget.dart';
+import 'package:counter_7/page/form.dart';
+import 'package:counter_7/page/my_watch_list_page.dart';
 
-enum ScreenName { Home, Form, ShowForm }
-
-class DrawerClass extends StatefulWidget {
-  final ScreenName parentScreen;
-  const DrawerClass({super.key, required this.parentScreen});
-  @override
-  State<DrawerClass> createState() => _DrawerClassState();
-}
-
-class _DrawerClassState extends State<DrawerClass> {
-  @override
-  Widget build(BuildContext context) {
+Drawer getDrawer(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          ListTile(
-            title: Text('Counter_7'),
-            onTap: () {
-              if (widget.parentScreen != ScreenName.Home) {
+        child: Column(
+            children: [
+            // Menambahkan clickable menu
+            ListTile(
+                title: const Text('counter_7'),
+                onTap: () {
+                // Route menu ke halaman utama
                 Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Program Counter',)),
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
-              } else {
-                Navigator.pop(context);
-              }
-            },
-          ),
-          ListTile(
-            title: Text('Tambah Budget'),
-            onTap: () {
-              if (widget.parentScreen != ScreenName.Form) {
+                },
+            ),
+            ListTile(
+                title: const Text('Tambah Budget'),
+                onTap: () {
+                // Route menu ke halaman form
                 Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const FormPage()),
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyFormPage()),
                 );
-              } else {
-                Navigator.pop(context);
-              }
-            },
-          ),
-          ListTile(
-            title: Text('Data Budget'),
-            onTap: () {
-              if (widget.parentScreen != ScreenName.ShowForm) {
+                },
+            ),
+            ListTile(
+                title: const Text('Data Budget'),
+                onTap: () {
+                // Route menu ke halaman tampilin data
                 Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyShowForm()),
+                    context,
+                    MaterialPageRoute(builder: (context) => const BudgetPage()),
                 );
-              } else {
-                Navigator.pop(context);
-              }
-            },
-          ),
-        ],
-      ),
+                },
+            ),
+            ListTile(
+                title: const Text('My WatchList'),
+                onTap: () {
+                    // Route menu ke halaman my watchlist
+                    Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyWatchListPage()),
+                    );
+                },
+            ),
+            ],
+        ),
     );
-  }
 }
